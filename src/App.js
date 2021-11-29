@@ -55,8 +55,16 @@ console.log("AUTH ",isAuthenticated())
         <Suspense fallback={<p>⌛️💤Chargement...</p>}>
           <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/sign-in.html" component={SignIn} />
-            <PublicRoute
+          {/* <Route exact path="/sign-in.html" component={SignIn} /> */}
+          <Route exact path="/signin" component={SignIn} />
+          <PrivateRoute
+              path="/user"
+              isAuthenticated={isAuthenticated()}
+
+            >
+              <User />
+              </PrivateRoute>
+            {/* <PublicRoute
               path="home"
               isAuthenticated={isAuthenticated()}
             >
@@ -73,7 +81,7 @@ console.log("AUTH ",isAuthenticated())
               isAuthenticated={isAuthenticated()}
             >
               <ProtectedRoute />
-            </PrivateRoute>
+            </PrivateRoute> */}
           </Switch>
         </Suspense>
       </div>
