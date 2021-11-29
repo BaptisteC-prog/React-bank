@@ -2,8 +2,10 @@ import axios from "axios";
 import { API_URL } from "..";
 import { setInLocalStore } from "../helpers";
 import { store } from "..";
-import { useSelector, useReducer } from "react-redux";
+import { useSelector, useReducer, connect } from "react-redux";
 import { getFromLocalStore } from "../helpers";
+
+
 
 export const USER_TOKEN = "USER_TOKEN"
 export const SET_USER = "SET_USER"
@@ -38,7 +40,7 @@ export const LOG_OUT = "LOG_OUT"
 function isAuthenticated() {
     let state = store.getState();
     return getFromLocalStore("token") === state.userReducer.token
-  }
+}
 
 export const userLogin = (username_, password_) => {
     console.log(username_, password_)
@@ -62,14 +64,15 @@ export const userLogin = (username_, password_) => {
                 console.log("TOKEN", response.data.body.token)
                 setInLocalStore("login", response.data)
                 setInLocalStore("token", response.data.body.token)
-                
+
                 console.log("TOKEN LOCAL STORAGE", getFromLocalStore("token"))
                 const state = store.getState();
                 console.log("TOKEN STORE REDUX", state.userReducer.token)
-                console.log("AUTH ",isAuthenticated())
+                console.log("AUTH ", isAuthenticated())
                 // localStorage.setItem("login", JSON.stringify(response.data));
                 // localStorage.setItem("token", JSON.stringify(response.data.body.token));
             })
             .catch((err) => console.log("❌💥", err))
     }
 }
+
