@@ -1,26 +1,54 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { userLogin } from '../actions/userActions';
 import store from '../store';
+import { connect, useDispatch, useSelector } from 'react-redux';
+
 //password123
-export function SignIn() {
+
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.userReducer.user,
+        token: state.userReducer.token
+    }
+}
+
+export default connect(mapStateToProps)(SignIn)
+
+
+
+export function SignIn(props) {
 
     const username = useRef(null)
     const password = useRef(null)
+    const dispatch = useDispatch()
 
-    const handleClick = e => {
+    const handleClick = (e) => {
         //alert()  
 
         e.preventDefault()
+        dispatch(userLogin(username.current.value, password.current.value)).then(()=>{
+            console.log(props);
+            props.history.push("/user")
+        })
+
         //store dispatch
         //console.log(username.current.value,password.current.value)
-        store.dispatch(userLogin(username.current.value, password.current.value))
+
+        /*
+                store.dispatch(userLogin(username.current.value, password.current.value)).then(() => {
+                    console.log(props);
+                    props.history.push("/user")
+                })*/
+
+
         //
     }
 
     return (
         <div id="SignIn">
             <nav className="main-nav">
-                <a className="main-nav-logo" href="./index.html">
+                <a className="main-nav-logo" href="./index">
                     <img
                         className="main-nav-logo-image"
                         src="./img/argentBankLogo.png"
@@ -29,7 +57,7 @@ export function SignIn() {
                     <h1 className="sr-only">Argent Bank</h1>
                 </a>
                 <div>
-                    <a className="main-nav-item" href="./sign-in.html">
+                    <a className="main-nav-item" href="./signin">
                         <i className="fa fa-user-circle"></i>
                         Sign In
                     </a>
@@ -54,7 +82,7 @@ export function SignIn() {
                         </div>
 
                         <button onClick={handleClick} className="sign-in-button">Sign In</button>
-                        <a href="/user.html">user html</a>
+                        <a href="/user">user html</a>
 
                     </form>
                 </section>

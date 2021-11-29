@@ -14,7 +14,7 @@ export function User() {
         <div id="User">
                 <Hello />
                 <nav className="main-nav">
-                    <a className="main-nav-logo" href="./index.html">
+                    <a className="main-nav-logo" href="./index">
                         <img
                             className="main-nav-logo-image"
                             src="./img/argentBankLogo.png"
@@ -23,11 +23,11 @@ export function User() {
                         <h1 className="sr-only">Argent Bank</h1>
                     </a>
                     <div>
-                        <a className="main-nav-item" href="./user.html">
+                        <a className="main-nav-item" href="./user">
                             <i className="fa fa-user-circle"></i>
           Tony
         </a>
-                        <a className="main-nav-item" href="./index.html">
+                        <a className="main-nav-item" href="./index">
                             <i className="fa fa-sign-out"></i>
           Sign Out
         </a>
